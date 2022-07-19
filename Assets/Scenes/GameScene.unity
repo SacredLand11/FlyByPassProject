@@ -174,7 +174,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -249,9 +249,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819c6b1597c450c4cb06880407d38e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoadPrefab: {fileID: 8849697782206934648, guid: da87acf1d1727d04bbb06dc33e1fb63e, type: 3}
+  RoadPrefab: {fileID: 6725082771641609529, guid: 47f35dc378c40394a9b68c1376247606, type: 3}
   BrickPrefab: {fileID: 2187830459195330847, guid: b01e3473ce6b5c0468e5db4805baf512, type: 3}
   player: {fileID: 7061263127675326115, guid: 76abb4908de8b0c468c72fe77d4dac92, type: 3}
+  progressBarPrefab: {fileID: 1622903588845329754, guid: c1f86f6e8f749874584a9940c797af63, type: 3}
+  startGamePrefab: {fileID: 8115539816587901344, guid: 5f20294e3711b394db57f206e3256f59, type: 3}
+  bonusCubeParentPrefab: {fileID: 5235190494556784583, guid: 6523a8f0e67825447893a8c67355eccc, type: 3}
+  arrow: {fileID: 0}
+  playerPosz: 0
+  bonus: 0
 --- !u!4 &724346735
 Transform:
   m_ObjectHideFlags: 0
