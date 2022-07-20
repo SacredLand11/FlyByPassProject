@@ -12,32 +12,47 @@ public class GameControllerScript : MonoBehaviour
     public GameObject progressBarPrefab;
     public GameObject startGamePrefab;
     public GameObject bonusCubeParentPrefab;
+    public GameObject menuPrefab;
+    public GameObject moneyTextPrefab;
     [Header("Canvas")]
     [SerializeField] Image arrow;
     [Header("Variables")]
     [SerializeField] float playerPosz;
-    [SerializeField] int bonus;
+    [SerializeField] bool startBool = true;
+    [SerializeField] public bool startmenuBool = true;
     void Awake()
     {
-        Instantiate(RoadPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
+        Instantiate(RoadPrefab, transform.position, Quaternion.identity);
         Instantiate(player, transform.position, Quaternion.identity);
-        Instantiate(bonusCubeParentPrefab, transform.position, Quaternion.identity);
+        Instantiate(bonusCubeParentPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(progressBarPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
-        Instantiate(startGamePrefab, transform.position, Quaternion.identity);
+        Instantiate(startGamePrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
+        Instantiate(menuPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
+        Instantiate(moneyTextPrefab, transform.position, Quaternion.identity);
         for (int i = 0; i < 5; i++)
         {
             Vector3 randomSpawnPosition = new Vector3(Random.Range(-1, 2)*3, 0, 7.5f * i);
             Instantiate(BrickPrefab, randomSpawnPosition, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         }
+
+
     }
     private void Start()
     {
+        Time.timeScale = 0;
         arrow = GameObject.Find("ProgressBarCanvas(Clone)").gameObject.transform.GetChild(2).GetComponent<Image>();
         StartCoroutine(Countdown(3));
     }
     private void Update()
     {
-        bonus = GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().money;
+        if (!startBool)
+        {
+            Time.timeScale = 1;
+        }
+        if (!startmenuBool)
+        {
+            Time.timeScale = 0;
+        }
         CurrentArrowPosition();
     }
 
@@ -66,5 +81,10 @@ public class GameControllerScript : MonoBehaviour
         {
             arrow.rectTransform.position = new Vector3(175 + (700 / 111) * playerPosz, 1630, 0);
         }
+    }
+    public void setStartActive()
+    {
+        startBool = false;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

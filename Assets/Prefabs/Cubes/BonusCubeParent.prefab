@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusCube: {fileID: 7555843880067022755, guid: 6f820b9cb02fe214ea3ba3b1886cc784, type: 3}
+  bonusCubeMat: {fileID: 2100000, guid: 701da485697ccdc4080a4f5ae4e3ea15, type: 2}
   bonusList: []

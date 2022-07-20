@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("GameObjects")]
     public GameObject smallBrickPrefab;
+    public GameObject openMenuPrefab;
     [Header("Texts")]
     public Text brickText;
     [Header("List")]
@@ -14,16 +17,23 @@ public class PlayerMovement : MonoBehaviour
 
     int brickScore;
     int a;
+    public int openint;
     float yaw = 0.0f;
     bool isFly = false;
     bool isre_Fly = true;
     bool falling = false;
     bool courotineBool = false;
+    bool start = false;
+    bool motion = true;
+    bool open;
+    public bool moneycollect;
     Vector3 flyVec;
-
 
     private void Start()
     {
+        openint = 0;
+        moneycollect = false;
+        open = true;
         brickScore = 0;
         a = 0; // List Number
         GetComponent<Animator>().SetBool("Fly", false);
@@ -35,7 +45,13 @@ public class PlayerMovement : MonoBehaviour
         Movement();
     }
     private void LateUpdate()
-    {     
+    {
+        Debug.Log(open);
+        Move_Update();
+    }
+
+    private void Move_Update()
+    {
         if (isFly)
         {
             if (isre_Fly)
@@ -77,9 +93,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 this.transform.Translate(-flyVec * Time.deltaTime);
             }
-            if(this.transform.position.y == 0)
+            if (this.transform.position.y == 0)
             {
                 isFly = false;
+            }
+        }
+        if (start)
+        {
+            GetComponent<Rigidbody>().velocity = transform.forward * 8;
+            if (!open)
+            {
+                GetComponent<Rigidbody>().velocity = transform.forward * 0;
             }
         }
     }
@@ -99,11 +123,12 @@ public class PlayerMovement : MonoBehaviour
     public void StartGameKey()
     {
         GetComponent<Animator>().SetTrigger("StartGame");
+        start = true;
     }
 
     private void Movement()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && motion)
         {
             yaw += Input.GetTouch(0).deltaPosition.x * 10 * Time.deltaTime;
             yaw = Mathf.Clamp(yaw, -80, 80);
@@ -115,6 +140,10 @@ public class PlayerMovement : MonoBehaviour
     public void Dance()
     {
         GetComponent<Animator>().SetTrigger("BonusTrig");
+        this.transform.eulerAngles = new Vector3(this.transform.rotation.x, this.transform.rotation.y + 180, this.transform.rotation.z);
+        isFly = false;
+        start = false;
+        motion = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -159,5 +188,35 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Animator>().SetBool("Fly", true);
             isFly = true;
         }
+    }
+    public void NextLevelScene()
+    {
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().moneycollect = true;
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().StartCoroutine(SceneTransition());
+    }
+    public IEnumerator SceneTransition()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(sceneName: "SampleScene");
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void OpenMenu()
+    {
+        if(GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint < 1)
+        {
+            Instantiate(openMenuPrefab);
+        }
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = false;
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint++;
+    }
+    public void CloseMenu()
+    {
+        Destroy(GameObject.Find("OpenMenuCanvas(Clone)"));
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = true;
+        GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint = 0;
     }
 }

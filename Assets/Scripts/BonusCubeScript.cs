@@ -6,8 +6,11 @@ public class BonusCubeScript : MonoBehaviour
 {
     PlayerMovement player;
     public int multiply;
+    public GameObject claimButton;
+    public bool won;
     private void Start()
     {
+        won = false;
         player = GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>();
     }
     private void OnTriggerEnter(Collider other)
@@ -15,7 +18,12 @@ public class BonusCubeScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.Dance();
-            GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().money *= multiply;
+            if (!won)
+            {
+                GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().money *= multiply;
+                won = true;
+            }
+            Instantiate(claimButton);  
         }
     }
 }
