@@ -60,9 +60,10 @@
     <Compile Include="Assets\Scripts\FinishScript.cs" />
     <Compile Include="Assets\Scripts\Fader.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\BonusCubeSpawner.cs" />
     <Compile Include="Assets\Scripts\BonusCubeScript.cs" />
+    <Compile Include="Assets\Scripts\BonusCubeSpawner.cs" />
+    <Compile Include="Assets\Scripts\BotMovementScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

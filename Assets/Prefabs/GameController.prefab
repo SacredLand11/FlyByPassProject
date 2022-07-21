@@ -52,9 +52,12 @@ MonoBehaviour:
   bonusCubeParentPrefab: {fileID: 5235190494556784583, guid: 6523a8f0e67825447893a8c67355eccc, type: 3}
   menuPrefab: {fileID: 3682088216839824501, guid: 72133a204b20e7b4380fbe47cb027cf9, type: 3}
   moneyTextPrefab: {fileID: 2397684046726065608, guid: b456bdc7f44e25341bc63a32353cdc01, type: 3}
+  bot: {fileID: 5018904064997057349, guid: 3023bec38f9100d439bb60ec4dd732cf, type: 3}
+  bot2: {fileID: 8445807127676657592, guid: 64571cdcd4d0bb949abaddf43101da72, type: 3}
   arrow: {fileID: 0}
   playerPosz: 0
   startBool: 1
+  startmenuBool: 1
 --- !u!1001 &6844445832065535863
 PrefabInstance:
   m_ObjectHideFlags: 0

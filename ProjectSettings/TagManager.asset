@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bricks
   - Plane
+  - Bot
+  - BotPlane
   layers:
   - Default
   - TransparentFX

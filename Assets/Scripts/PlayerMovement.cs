@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public GameObject openMenuPrefab;
     [Header("Texts")]
     public Text brickText;
-    [Header("List")]
-    [SerializeField] public List<GameObject> brickList = new List<GameObject>();
 
     int brickScore;
     int a;
@@ -42,11 +40,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         brickText.text = brickScore.ToString();
-        Movement();
     }
     private void LateUpdate()
     {
-        Debug.Log(open);
+        Movement();
         Move_Update();
     }
 
@@ -54,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFly)
         {
-            if (isre_Fly)
+            if (isre_Fly && this.transform.position.y < 2)
             {
                 this.transform.Translate(flyVec * Time.deltaTime * 1.5f);
             }
@@ -83,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
                 falling = true;
                 courotineBool = false;
             }
-            if (this.transform.position.y > 2)
+            if (this.transform.position.y > 1.9f)
             {
                 this.transform.Translate(new Vector3(0, 0, 0));
                 isre_Fly = false;
@@ -152,26 +149,24 @@ public class PlayerMovement : MonoBehaviour
         {
             brickScore += 3;
             a += 1;
+            Instantiate(smallBrickPrefab).transform.SetParent(GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).transform);
             Destroy(other.gameObject);
-            //Vector3 brickPos = new Vector3(transform.position.x, transform.position.y + 0.25f + (a-5) * 0.015f, transform.position.z -0.025f * (a-5));
-            Quaternion angle = this.transform.rotation;
-            //Object.Instantiate(smallBrickPrefab, brickPos, angle, this.transform);
-
-            brickList.Add(Instantiate(smallBrickPrefab, transform.position, angle));
-            brickList[a - 1].transform.SetParent(this.transform);
-            if(a == 1)
+            if (a == 1)
             {
-                brickList[0].transform.rotation = this.transform.rotation;
-                brickList[0].transform.position = this.transform.position;
+                GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).gameObject.transform.GetChild(a).transform.rotation = GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).transform.rotation;
+                GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).gameObject.transform.GetChild(a).transform.position = GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).transform.position;
+
             }
 
             if (a >= 2)
             {
-                brickList[a - 1].transform.rotation = this.transform.rotation;
-                brickList[a - 1].transform.position = this.transform.position;
+                GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).gameObject.transform.GetChild(a).transform.rotation = GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).transform.rotation;
+                GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).gameObject.transform.GetChild(a).transform.position = GameObject.Find("Character(Clone)").gameObject.transform.GetChild(2).transform.position;
             }
+
         }
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Plane")
@@ -193,16 +188,19 @@ public class PlayerMovement : MonoBehaviour
     {
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().moneycollect = true;
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().StartCoroutine(SceneTransition());
+        int moneyvariable = int.Parse(GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().moneyText.text) + GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().money;
+        GameObject.Find("Level1Path(Clone)/FinishRoad").GetComponent<FinishScript>().moneyText.text = moneyvariable.ToString();
+        GameObject.Find("ClaimButton(Clone)").gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
     }
     public IEnumerator SceneTransition()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene(sceneName: "SampleScene");
     }
 
     public void RestartScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OpenMenu()
     {
@@ -211,12 +209,14 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(openMenuPrefab);
         }
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = false;
+        GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>().open = false;
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint++;
     }
     public void CloseMenu()
     {
         Destroy(GameObject.Find("OpenMenuCanvas(Clone)"));
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = true;
+        GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>().open = true;
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint = 0;
     }
 }

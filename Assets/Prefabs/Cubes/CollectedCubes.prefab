@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 371854024998423597}
   m_Layer: 0
   m_Name: RightCollected
-  m_TagString: Bricks
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 7763789286595912690}
   m_Layer: 0
   m_Name: LeftCollected
-  m_TagString: Bricks
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

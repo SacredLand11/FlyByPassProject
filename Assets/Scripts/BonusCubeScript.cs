@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BonusCubeScript : MonoBehaviour
 {
     PlayerMovement player;
+    BotMovementScript bot;
+    BotMovementScript bot2;
     public int multiply;
     public GameObject claimButton;
     public bool won;
@@ -12,6 +15,8 @@ public class BonusCubeScript : MonoBehaviour
     {
         won = false;
         player = GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>();
+        bot = GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>();
+        bot2 = GameObject.Find("Bot2(Clone)").GetComponent<BotMovementScript>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,5 +30,11 @@ public class BonusCubeScript : MonoBehaviour
             }
             Instantiate(claimButton);  
         }
+        if (other.gameObject.tag == "Bot")
+        {
+            bot.Dance();
+            bot2.Dance();
+        }
+
     }
 }

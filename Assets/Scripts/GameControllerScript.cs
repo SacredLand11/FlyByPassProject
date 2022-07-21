@@ -14,12 +14,17 @@ public class GameControllerScript : MonoBehaviour
     public GameObject bonusCubeParentPrefab;
     public GameObject menuPrefab;
     public GameObject moneyTextPrefab;
+    public GameObject bot;
+    public GameObject bot2;
     [Header("Canvas")]
     [SerializeField] Image arrow;
     [Header("Variables")]
     [SerializeField] float playerPosz;
     [SerializeField] bool startBool = true;
     [SerializeField] public bool startmenuBool = true;
+
+
+    static bool hasSpawned = false;
     void Awake()
     {
         Instantiate(RoadPrefab, transform.position, Quaternion.identity);
@@ -28,13 +33,16 @@ public class GameControllerScript : MonoBehaviour
         Instantiate(progressBarPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(startGamePrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(menuPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
-        Instantiate(moneyTextPrefab, transform.position, Quaternion.identity);
-        for (int i = 0; i < 5; i++)
-        {
-            Vector3 randomSpawnPosition = new Vector3(Random.Range(-1, 2)*3, 0, 7.5f * i);
-            Instantiate(BrickPrefab, randomSpawnPosition, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
-        }
+        Instantiate(bot);
+        Instantiate(bot2);
 
+        if (hasSpawned)
+        {
+            return;
+        }
+        Instantiate(moneyTextPrefab, transform.position, Quaternion.identity);
+        DontDestroyOnLoad(GameObject.Find("MoneyTextCanvas(Clone)"));
+        hasSpawned = true;
 
     }
     private void Start()
@@ -70,16 +78,20 @@ public class GameControllerScript : MonoBehaviour
     void StartGame()
     {
         PlayerMovement startgame = GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>();
+        BotMovementScript startbotgame = GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>();
+        BotMovementScript startbot2game = GameObject.Find("Bot2(Clone)").GetComponent<BotMovementScript>();
         startgame.StartGameKey();
+        startbotgame.StartGameKey();
+        startbot2game.StartGameKey();
         Destroy(GameObject.Find("StartGameText(Clone)"));
     }
     // To determine the progressbar level
     void CurrentArrowPosition()
     {
         playerPosz = GameObject.Find("Character(Clone)").transform.position.z;
-        if (playerPosz <= 124)
+        if (playerPosz <= 261)
         {
-            arrow.rectTransform.position = new Vector3(175 + (700 / 111) * playerPosz, 1630, 0);
+            arrow.rectTransform.position = new Vector3(175 + 2.75f * playerPosz, 1630, 0);
         }
     }
     public void setStartActive()
