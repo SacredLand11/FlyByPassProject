@@ -276,6 +276,7 @@ public class PlayerMovement : MonoBehaviour
         }
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = false;
         GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>().open = false;
+        GameObject.Find("Bot2(Clone)").GetComponent<BotMovementScript>().open = false;
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint++;
     }
     public void CloseMenu()
@@ -283,6 +284,7 @@ public class PlayerMovement : MonoBehaviour
         Destroy(GameObject.Find("OpenMenuCanvas(Clone)"));
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().open = true;
         GameObject.Find("Bot(Clone)").GetComponent<BotMovementScript>().open = true;
+        GameObject.Find("Bot2(Clone)").GetComponent<BotMovementScript>().open = true;
         GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>().openint = 0;
     }
 }
