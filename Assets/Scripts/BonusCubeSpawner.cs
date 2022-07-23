@@ -9,6 +9,7 @@ public class BonusCubeSpawner : MonoBehaviour
     public List<GameObject> bonusList = new List<GameObject>();
     void Start()
     {
+        //Create the bonus cubes with random colors
         for (int i = 0; i < 9; i++)
         {
             bonusList.Add(Instantiate(bonusCube, new Vector3(0, -10, 8 * i + 267), Quaternion.identity));

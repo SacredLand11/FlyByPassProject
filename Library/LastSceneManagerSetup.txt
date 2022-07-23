@@ -1,9 +1,13 @@
 sceneSetups:
-- path: Assets/Scenes/GameScene.unity
+- path: Assets/Scenes/Lv.1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
-- path: Assets/Scenes/SampleScene.unity
+- path: Assets/Scenes/Lv.2.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Lv.3.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0

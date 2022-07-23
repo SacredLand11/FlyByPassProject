@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1366728441084838162}
+  - component: {fileID: 6043250551544168033}
   m_Layer: 0
   m_Name: Level1Path
-  m_TagString: Untagged
+  m_TagString: PathRoad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +84,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6043250551544168033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725082771641609529}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1000, y: 1, z: 1000}
+  m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!1001 &30365472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2743,9 +2757,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
+      propertyPath: Photo
+      value: 
+      objectReference: {fileID: 2923481532557087742, guid: d4985ab9acf1b7b4fad1c3c94a16ef2b, type: 3}
+    - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
       propertyPath: moneyText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
+      propertyPath: PhotoCanvas
+      value: 
+      objectReference: {fileID: 7556760326461100356, guid: 9459711addc5a364a88603eb01257fb2, type: 3}
+    - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
+      propertyPath: TargetTexture
+      value: 
+      objectReference: {fileID: 8600000, guid: b61914df1aaf53444a6c265263d876ca, type: 2}
+    - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
+      propertyPath: CaptureTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: aa2758d5e171934479a307e26669a6ba, type: 3}
+    - target: {fileID: 7573041358284061150, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
+      propertyPath: SnapshotCamera
+      value: 
+      objectReference: {fileID: 7736290035766753710, guid: cbc46219cdbd8fc4f892daebbc810008, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca6b8d1ffa8b344b99390415384b3af, type: 3}
 --- !u!4 &2057582056268805333 stripped

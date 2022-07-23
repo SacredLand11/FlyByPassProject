@@ -251,7 +251,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-6397919276130031282
 Rigidbody:
@@ -282,5 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiply: 0
+  claimButtonNumber: 0
   claimButton: {fileID: 6741937051881749698, guid: 2f1956a672cd78746b64701a88a62e51, type: 3}
   won: 0

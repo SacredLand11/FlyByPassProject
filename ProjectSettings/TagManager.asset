@@ -8,6 +8,9 @@ TagManager:
   - Plane
   - Bot
   - BotPlane
+  - LevelRoad
+  - PathRoad
+  - SmallBrick
   layers:
   - Default
   - TransparentFX

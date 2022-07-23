@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject bot2;
     [Header("Canvas")]
     [SerializeField] Image arrow;
+    [SerializeField] Text levelText;
     [Header("Variables")]
     [SerializeField] float playerPosz;
     [SerializeField] bool startBool = true;
@@ -27,15 +29,18 @@ public class GameControllerScript : MonoBehaviour
     static bool hasSpawned = false;
     void Awake()
     {
-        Instantiate(RoadPrefab, transform.position, Quaternion.identity);
-        Instantiate(player, transform.position, Quaternion.identity);
+        //Instantiate the Objects
+            //To see clear hierarchy hide some objects
+        Instantiate(RoadPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(bonusCubeParentPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(progressBarPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(startGamePrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
         Instantiate(menuPrefab, transform.position, Quaternion.identity).hideFlags = HideFlags.HideInHierarchy;
+            //Objects which are needed in the hierarchy
+        Instantiate(player);
         Instantiate(bot);
         Instantiate(bot2);
-
+        // To keep money to next scenes
         if (hasSpawned)
         {
             return;
@@ -47,12 +52,17 @@ public class GameControllerScript : MonoBehaviour
     }
     private void Start()
     {
+        //Start Condition
         Time.timeScale = 0;
         arrow = GameObject.Find("ProgressBarCanvas(Clone)").gameObject.transform.GetChild(2).GetComponent<Image>();
+        levelText = GameObject.Find("ProgressBarCanvas(Clone)").gameObject.transform.GetChild(3).GetComponent<Text>();
+        levelText.text = SceneManager.GetActiveScene().name;
+        // Ready Condition
         StartCoroutine(Countdown(3));
     }
     private void Update()
     {
+        //Time Conditions
         if (!startBool)
         {
             Time.timeScale = 1;
@@ -61,9 +71,10 @@ public class GameControllerScript : MonoBehaviour
         {
             Time.timeScale = 0;
         }
+        //To determine the rest of the path
         CurrentArrowPosition();
     }
-
+    //Countdown Function when the player press the ready
     IEnumerator Countdown(int seconds)
     {
         int count = seconds;
@@ -73,8 +84,10 @@ public class GameControllerScript : MonoBehaviour
             yield return new WaitForSeconds(1);
             count--;
         }
+        //To active bots and player
         StartGame();
     }
+    //To active the movement
     void StartGame()
     {
         PlayerMovement startgame = GameObject.Find("Character(Clone)").GetComponent<PlayerMovement>();
@@ -85,18 +98,27 @@ public class GameControllerScript : MonoBehaviour
         startbot2game.StartGameKey();
         Destroy(GameObject.Find("StartGameText(Clone)"));
     }
-    // To determine the progressbar level
-    void CurrentArrowPosition()
-    {
-        playerPosz = GameObject.Find("Character(Clone)").transform.position.z;
-        if (playerPosz <= 261)
-        {
-            arrow.rectTransform.position = new Vector3(175 + 2.75f * playerPosz, 1630, 0);
-        }
-    }
+    //To deactive the movement
     public void setStartActive()
     {
         startBool = false;
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
+    // To determine the progressbar level
+    void CurrentArrowPosition()
+    {
+        if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowCamera>().enabled)
+        {
+            playerPosz = GameObject.Find("Character(Clone)").transform.position.z;
+            if (playerPosz <= 261)
+            {
+                arrow.rectTransform.position = new Vector3(175 + 2.75f * playerPosz, 1630, 0);
+            }
+        }
+        if(!GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowCamera>().enabled)
+        {
+            playerPosz = 0;
+        }
+    }
+
 }

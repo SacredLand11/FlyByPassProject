@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819c6b1597c450c4cb06880407d38e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoadPrefab: {fileID: 6725082771641609529, guid: 47f35dc378c40394a9b68c1376247606, type: 3}
+  RoadPrefab: {fileID: 8465168053816083487, guid: 1c74bd73709722f42a19ba19e614cd7c, type: 3}
   BrickPrefab: {fileID: 2187830459195330847, guid: b01e3473ce6b5c0468e5db4805baf512, type: 3}
   player: {fileID: 7061263127675326115, guid: 76abb4908de8b0c468c72fe77d4dac92, type: 3}
   progressBarPrefab: {fileID: 1622903588845329754, guid: c1f86f6e8f749874584a9940c797af63, type: 3}

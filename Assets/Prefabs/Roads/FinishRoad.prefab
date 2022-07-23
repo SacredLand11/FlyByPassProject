@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7573041358284061150}
   m_Layer: 0
   m_Name: FinishRoad
-  m_TagString: Untagged
+  m_TagString: LevelRoad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21d08b5104fe44419cebfd3b32a708e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetTexture: {fileID: 0}
+  SnapshotCamera: {fileID: 0}
+  SnapshotName: 
+  CaptureTexture: {fileID: 0}
+  PhotoCanvas: {fileID: 0}
   faderPrefab: {fileID: 8539500416238193774, guid: 90165f6b2eab36749be7c644a396afea, type: 3}
   moneyText: {fileID: 2397684046726065608, guid: b456bdc7f44e25341bc63a32353cdc01, type: 3}
   money: 0
